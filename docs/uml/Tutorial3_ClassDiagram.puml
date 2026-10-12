@@ -1,0 +1,68 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class ProductController {
+  - productService : ProductService
+  + getAllProducts() : List<Product>
+  + getProductById(id : Long) : Product
+  + addProduct(product : Product) : Product
+  + deleteProduct(id : Long) : void
+}
+
+class ProductService {
+  - products : List<Product>
+  - nextId : Long
+  + getAllProducts() : List<Product>
+  + getProductById(id : Long) : Optional<Product>
+  + addProduct(product : Product) : Product
+  + deleteProduct(id : Long) : void
+  + findByName(name : String) : List<Product>
+}
+
+class Product {
+  - id : Long
+  - name : String
+  - price : double
+  + Product()
+  + Product(id : Long, name : String, price : double)
+  + getId() : Long
+  + getName() : String
+  + getPrice() : double
+  + setId(id : Long) : void
+  + setName(name : String) : void
+  + setPrice(price : double) : void
+}
+
+class Customer {
+  - id : Long
+  - name : String
+  - email : String
+  - address : Address
+  + Customer()
+  + Customer(id : Long, name : String, email : String, address : Address)
+  + getId() : Long
+  + getName() : String
+  + getEmail() : String
+  + getAddress() : Address
+}
+
+class Address {
+  - street : String
+  - city : String
+  - postcode : String
+  + Address()
+  + Address(street : String, city : String, postcode : String)
+  + getStreet() : String
+  + getCity() : String
+  + getPostcode() : String
+}
+
+' dependency: dashed line, open arrow
+ProductController ..> ProductService : uses
+
+' association: solid line
+ProductService --> "0..*" Product : holds
+
+Customer --> Address : has an
+
+@enduml
