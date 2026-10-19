@@ -15,6 +15,16 @@ public class ProductService {
         return products;
     }
 
+    public ProductService() {
+        products.add(new DigitalProduct(
+            nextId++, "Clean Code (E-book)", 29.9,
+            "/downloads/clean-code.pdf", 4.2));
+
+        products.add(new PhyscialProduct(
+                nextId++, "27-inch Monitor", 249.99,
+                5.4, "61cm x 41cm x 18cm"));
+    }
+
     public Product addProduct(Product product) {
         product.setId(nextId++); // use the value, then add one
         products.add(product);
